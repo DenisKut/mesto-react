@@ -9,7 +9,7 @@ class Api {
       method: 'GET',
       headers: this._headers
     })
-      .then(checkErrors);
+      .then(this.checkErrors);
   }
 
   getUserInfo() {
@@ -17,7 +17,7 @@ class Api {
       method: 'GET',
       headers: this._headers
     })
-      .then(checkErrors);
+      .then(this.checkErrors);
   }
 
   setUserInfo(data) {
@@ -29,7 +29,7 @@ class Api {
         about: data.ProfileProfession,
       })
     })
-      .then(checkErrors)
+      .then(this.checkErrors)
   }
 
   setAvatar(data) {
@@ -41,7 +41,7 @@ class Api {
         avatar: data.AvatarLink
       })
     })
-    .then(checkErrors)
+    .then(this.checkErrors)
   }
 
   addCard(data) {
@@ -53,7 +53,7 @@ class Api {
         link: data.CardLink
       })
     })
-      .then(checkErrors);
+      .then(this.checkErrors);
   }
 
   deleteCard(data) {
@@ -61,7 +61,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(checkErrors);
+      .then(this.checkErrors);
   }
 
   addLike(data) {
@@ -69,7 +69,7 @@ class Api {
       method: 'PUT',
       headers: this._headers
     })
-      .then(checkErrors);
+      .then(this.checkErrors);
   }
 
   deleteLike(data) {
@@ -77,20 +77,20 @@ class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then(checkErrors);
+      .then(this.checkErrors);
   }
 
-  renderData() {
+  getInitialData() {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
   }
-}
 
-const checkErrors = (res) => {
-  if (res.ok) {
-    return res.json();
+  checkErrors(res) {
+    if (res.ok) {
+      return res.json();
+    }
+  
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
-
-  return Promise.reject(`Ошибка: ${res.status}`);
 }
 
 export default Api = new Api({

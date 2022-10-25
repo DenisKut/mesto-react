@@ -2,14 +2,21 @@ import React, {useState, useEffect} from "react";
 import api from "../utils/Api.js";
 import Card from "./Card.js";
 
-export default function Main({onEditProfile, onAddPlace, onEditAvatar, handleCardClick, handleDeleteCardPopup}) {
+export default function Main({onEditProfile, onAddPlace, onEditAvatar, handleCardClick}) {
   const [userName, setUserName] = useState("");
   const [userDescription, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
+  const cardsElements = cards.map((item) => (
+    <Card
+      key={item._id}
+      cardData={item}
+      onCardClick={handleCardClick}
+    />
+  ))
 
   useEffect(() => {
-    api.renderData()
+    api.getInitialData()
       .then(([cards, user]) => {
         setUserName(user.name);
         setUserDescription(user.about);
@@ -45,14 +52,7 @@ export default function Main({onEditProfile, onAddPlace, onEditAvatar, handleCar
         ></button>
       </section>
       <section className="elements">
-        {cards.map((item) => (
-          <Card
-            key={item._id}
-            cardObject={item}
-            onCardClick={handleCardClick}
-            onDelete={handleDeleteCardPopup}
-          />
-        ))}
+        {cardsElements}
       </section>
     </main>
   )

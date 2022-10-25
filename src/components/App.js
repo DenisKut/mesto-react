@@ -2,7 +2,7 @@ import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
 import PopupWithForm from "./PopupWithForm.js";
-import PopupWithImage from "./PopupWithImage.js";
+import ImagePopup from "./ImagePopup.js";
 import React, {useState} from "react";
 
 export default function App() {
@@ -50,8 +50,8 @@ export default function App() {
         />
         <Footer/>
 
-        <PopupWithImage
-          cardObject={selectedCard}
+        <ImagePopup
+          selectedCard={selectedCard}
           isOpen={isImagePopupOpen}
           onClose={closeAllPopups}
         />

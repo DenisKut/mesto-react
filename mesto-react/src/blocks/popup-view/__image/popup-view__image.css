@@ -1,8 +1,0 @@
-.popup-view__image {
-  max-height: 75vh;
-  max-width: 75vw;
-}
-
-.popup-view__image:hover {
-  cursor: default;
-}

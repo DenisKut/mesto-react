@@ -25,8 +25,8 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.ProfileName,
-        about: data.ProfileProfession,
+        name: data.name,
+        about: data.about,
       })
     })
       .then(this.checkErrors)
@@ -38,7 +38,7 @@ class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-        avatar: data.AvatarLink
+        avatar: data.avatar
       })
     })
     .then(this.checkErrors)
@@ -49,8 +49,8 @@ class Api {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.CardName,
-        link: data.CardLink
+        name: data.name,
+        link: data.link
       })
     })
       .then(this.checkErrors);
@@ -84,11 +84,17 @@ class Api {
     return Promise.all([this.getInitialCards(), this.getUserInfo()]);
   }
 
+  changeLikeCardStatus(cardId, isLiked) {
+    return fetch(`${this._link}/cards/${cardId}/likes`, {
+      method: `${isLiked ? 'PUT' : 'DELETE'}`,
+      headers: this._headers,
+    }).then(this.checkErrors);
+  };
+
   checkErrors(res) {
     if (res.ok) {
       return res.json();
     }
-  
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 }

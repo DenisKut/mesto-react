@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from "react";
 import PopupWithForm from "./PopupWithForm";
 
 export default function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
-  const refOnAvatar = useRef('');
+  const refOnAvatar = useRef(null);
 
   useEffect(() => {
     refOnAvatar.current.value = '';

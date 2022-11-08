@@ -53,7 +53,7 @@ export default function App() {
     Api.deleteCard(card)
       .then(() => {
         setCards((state) =>
-          state.filter((c) => c._id === card._id ? false : true)
+          state.filter((c) => c._id === card._id)
         );
       })
       .catch(error => console.log(error));

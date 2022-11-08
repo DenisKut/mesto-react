@@ -6,7 +6,6 @@ export default function PopupWithForm({name, title, children, btnText, isOpen, o
           className="popup__form"
           name={name}
           autoComplete="off"
-          noValidate
           onSubmit={onSubmit}
         >
           <button
